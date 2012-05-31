@@ -300,6 +300,820 @@ h2,h3 {
     }
 
 
+/*
+# <h1 class="font-XL">Utility</h1>
+
+Common design patterns that should be used instead of writing things from scratch.
+
+Table of Contents:
+
+ * [Non-semantic helper classes](#section-2)
+ * [Pre-defined Font Sizes](#section-3)
+ * [Arrow button styles](#section-4)
+ * [Progress Bar](#section-5)
+ * [Loading](#section-6)
+ * [Logos](#section-7)
+ * [Icons](#section-8)
+ * [Buttons](#section-9)
+ * [Tabs](#section-10)
+ * [Switches](#section-11)
+ * [Dialog](#section-12)
+ */
+
+/*
+## <h2 class="font-L">Non-semantic helper classes</h2>
+
+Please define your styles before this section.
+*/
+
+/* For image replacement via text indent :-(
+ * http://www.css-101.org/articles/image-replacement/the_new_new_image-replacement_techniques.php
+ */
+.ir,
+.hide-txt {
+    font: 10px monospace;
+    letter-spacing: -10px;
+    text-indent: -500px; /* that should be enough */
+    overflow: hidden;
+}
+.ir br {
+    display: none;
+}
+
+/* Hide from both screenreaders and browsers: h5bp.com/u */
+.hidden {
+    display: none!important;
+    visibility: hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders: http://yaccessibilityblog.com/library/css-clip-hidden-content.html */
+.visuallyhidden {
+    border:0 !important;
+    clip:rect(1px, 1px, 1px, 1px);
+    height:1px !important;
+    position: absolute !important;
+    overflow: hidden;
+    padding:0 !important;
+    width:1px !important;
+}
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible {
+    visibility:hidden;
+}
+
+/* Hide only visually, but have it available for screenreaders (allows to get dimensions from the box) */
+.hide-off {
+    left: -999em;
+    position: absolute;
+}
+
+/* Contain floats: http://www.yuiblog.com/blog/2010/09/27/clearfix-reloaded-overflowhidden-demystified/ */
+.clearfix:before,
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+.clearfix:after {
+    clear: both;
+}
+
+/* Text ellipsis styling (ellipsis in WebKit only) */
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-height: 1.25em;
+}
+
+
+
+
+/*
+## <h2 class="font-L">Pre-defined Font Sizes</h2>
+
+ * medium (M) matches body style
+
+        <p class="font-XXL">Extra Extra Large</p>
+        <p class="font-XL">Extra Large</p>
+        <p class="font-L">Large</p>
+        <p class="font-ML">Medium Large</p>
+        <p class="font-M">Medium</p>
+        <p class="font-MS">Medium Small</p>
+        <p class="font-S">Small</p>
+        <p class="font-XS">Extra Small</p>
+*/
+.font-XXL {
+    font-size: 2.5rem;
+}
+
+.font-XL {
+    font-size: 2.1rem;
+}
+
+.font-L {
+    font-size: 1.9rem;
+}
+
+.font-ML {
+    font-size: 1.7rem;
+}
+
+.font-M {
+    font-size: 1.5rem;
+}
+
+.font-MS {
+    font-size: 1.3rem;
+}
+
+.font-S {
+    font-size: 1.1rem;
+}
+
+.font-XS {
+    font-size: 1rem;
+}
+
+
+
+/*
+## <h2 class="font-L">Arrow button styles</h2>
+
+    <button class="arrow-button">
+        <span class="arrow-icon">&nbsp</span>Tester Text
+    </button>
+
+    <span class="arrow arrow-up">Arrow</span>
+    <span class="arrow arrow-up success">Arrow</span>
+    <span class="arrow arrow-up error">Arrow</span>
+    <span class="arrow arrow-down">Arrow</span>
+    <span class="arrow arrow-next">Arrow</span>
+    <span class="arrow arrow-prev">Arrow</span>
+    <a href="http://www.yahoo.com" class="zed-link">Link</a>
+
+*/
+.arrow-button {
+    background:#292727;
+    border: 1px solid #000;
+    border-left: 0 none;
+    border-radius: 0 6px 6px 0;
+    color: #fff;
+    display: inline-block;
+    height: 2.8rem;
+    margin: 0.8rem 0 0.8rem 1.3rem; /* leave space for the arrow-icon */
+    position: relative;
+    padding: 0 5px 0 3px;
+}
+
+.arrow-icon {
+    border: 1px solid transparent;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    display: inline-block;
+    height: 2.8rem;
+    left: -1.4rem;
+    line-height: 0;
+    position: absolute;
+    overflow: hidden;
+    top: -2px;
+    width: 1.4rem;
+}
+.arrow-icon::before {
+    background: #292727;
+    border: 1px solid #000;
+    border-radius: 6px;
+    box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    content: ' ';
+    display: inline-block;
+    height: 2.2rem;
+    margin: 2px 0 0 2px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    width: 2.2rem;
+}
+
+.arrow {
+    color: transparent;
+    display: block;
+    height: 0;
+    line-height: 0;
+    padding: 0 !important;
+    position: relative;
+    text-indent: -999em;
+    width: 0;
+}
+
+.arrow-up {
+    border-color: transparent transparent #000;
+    border-style: solid;
+    border-width: 0 0.5em 0.5em;
+    top: 0.3em;
+}
+
+.arrow-down {
+    border-color: #000 transparent transparent;
+    border-style: solid;
+    border-width: 0.5em 0.5em 0;
+    top: 0.3em;
+}
+
+.arrow-next,
+.zed-link:after,
+.yog-rtl .arrow-prev {
+    border-color: transparent transparent transparent #000;
+    border-style: solid;
+    border-width: 0.5em 0 0.5em 0.5em;
+    margin: 0 0.20em 0 0.3em;
+    top: 0.05em;
+}
+
+.zed-link:after {
+    border-left-color: #b3b3b3;
+    content: ' ';
+    display: inline-block;
+    font-size: 10px;
+    margin-left: 0.7em;
+}
+
+.arrow-prev,
+.yog-rtl .arrow-next {
+    border-color: transparent #000 transparent transparent;
+    border-style: solid;
+    border-width: 0.5em 0.5em 0.5em 0;
+    margin: 0 0.3em 0 0.20em;
+    top: 0.05em;
+}
+
+.arrow-up.error {
+    border-color: transparent transparent #000;
+}
+
+.arrow-up.success {
+    border-color: transparent transparent #000;
+}
+
+/*
+## <h2 class="font-L">Progress Bar</h2>
+
+Use if you need a progress bar indicator in Zed.
+
+    <div class="zed-progressbar"><div class="progressbar_value">&nbsp;</div></div>
+
+*/
+.zed-progressbar,
+.zed-page-indicator {
+    background-color: #676767;
+    border: none;
+    display: block;
+}
+
+.zed-progressbar .progressbar_value,
+.zed-page-indicator .page-indicator-value {
+    background-color: #3eaa58;
+    display: block;
+    height: 100%;
+}
+
+
+/*
+## <h2 class="font-L">Loading Graphics</h2>
+
+    <p class="loading-sm ir" style="width:16px;height:16px;">Loading</p>
+
+*/
+.loading-sm {
+    background-image: url(http://l.yimg.com/us.yimg.com/i/nt/ic/ut/bsc/busyarr_1.gif);
+    background-repeat: no-repeat;
+}
+
+/*
+## <h2 class="font-L">Logos</h2>
+
+    <h1 class='zed-logo'>Z</h1>
+
+*/
+.zed-logo {
+    background-color: #000;
+    margin: 0 auto;
+    border-radius: 999em;
+    width: 75px;
+    height: 75px;
+    font-size: 5rem;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 75px;
+    cursor: default;
+}
+
+
+/*
+## <h2 class="font-L">Icons</h2>
+
+*/
+
+.zed-icon,
+.zed-iadd,
+.zed-iadd-type2,
+.zed-iarrow-down,
+.zed-iarrow-up,
+.zed-iarrow-up-lg,
+.zed-iavatar,
+.zed-icheck,
+.zed-iclose,
+.zed-ifacebooklogo,
+.zed-ifacebooklogo-lg,
+.zed-ilocation,
+.zed-imenu,
+.zed-iremove,
+.zed-isetting,
+.zed-ishare,
+.zed-istar,
+.zed-istar-on,
+.zed-iylogo,
+.zed-izedlogo,
+.zed-izedlogo-lg {
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.zed-iadd,
+.zed-interest-list .zed-interest-star {
+    background-image: url('/static/assets/images/icons/plus_green.png');
+    width: 80px;
+    height: 80px;
+}
+
+.zed-iremove,
+.zed-interest-list .active .zed-interest-star {
+    background-image: url('/static/assets/images/icons/remove_white.png');
+    width: 80px;
+    height: 80px;
+}
+
+.zed-iadd-type2 {
+    background-image: url('/static/assets/images/icons/plus_white.png');
+    width: 26px;
+    height: 26px;
+}
+
+.zed-iavatar {
+    background-image: url('http://l.yimg.com/a/i/identity2/profile_32e.png');
+    width: 32px;
+    height: 32px;
+}
+
+.zed-icheck {
+    background-image: url('/static/assets/images/icons/check_white.png');
+    width: 20px;
+    height: 20px;
+}
+
+.zed-iclose {
+    background-image: url(/static/assets/images/icons/close.png);
+    width: 15px;
+    height: 15px;
+}
+
+.zed-iarrow-down,
+.menutoggle {
+    background-image: url('/static/assets/images/icons/arrow_down_gray.png');
+    width: 38px;
+    height: 35px;
+}
+
+.zed-iarrow-up-lg {
+    background-image: url('/static/assets/images/icons/arrow_up_white.png');
+    width: 44px;
+    height: 44px;
+}
+
+.zed-iarrow-up,
+.zed-menu-shown .menutoggle {
+    background-image: url('/static/assets/images/icons/arrow_up_green.png');
+    width: 38px;
+    height: 35px;
+}
+
+.zed-imenu {
+    background-image: url('/static/assets/images/icons/menu_white.png');
+    width: 44px;
+    height: 44px;
+}
+
+.zed-ilocation {
+    background-image: url('/static/assets/images/icons/icon-location.png');
+    width: 11px;
+    height: 18px;
+}
+
+.zed-isetting {
+    background-image: url('/static/assets/images/icons/icon-setting.png');
+    width: 15px;
+    height: 15px;
+}
+
+.zed-ishare {
+    background-image: url('/static/assets/images/icons/share.png');
+    width: 44px;
+    height: 44px;
+}
+
+.zed-istar {
+    background-image: url('/static/assets/images/icons/star_white.png');
+    width: 44px;
+    height: 44px;
+}
+
+.zed-istar-on {
+    background-image: url('/static/assets/images/icons/star_blue.png');
+    width: 44px;
+    height: 44px;
+}
+
+.zed-iylogo {
+    background-image: url('/static/assets/images/icons/ylogo_white.png');
+    width: 40px;
+    height: 23px;
+}
+
+.zed-izedlogo,
+.zed-ifacebooklogo {
+    background-image: url('/static/assets/images/icons/networks.png');
+}
+
+.zed-izedlogo-lg,
+.zed-ifacebooklogo-lg {
+    background-image: url('/static/assets/images/icons/networks-large.png');
+}
+
+.zed-ifacebooklogo {
+    background-position: 0 -150px;
+    width: 25px;
+    height: 25px;
+}
+
+.zed-ifacebooklogo.off {
+    background-position: 0 -100px;
+}
+
+.zed-ifacebooklogo-lg {
+    background-position: 0 -300px;
+    width: 50px;
+    height: 50px;
+}
+
+.zed-ifacebooklogo.off {
+    background-position: 0 -200px;
+}
+
+.zed-izedlogo {
+    background-position: 0 -50px;
+    width: 25px;
+    height: 25px;
+}
+
+.zed-izedlogo.off,
+.zed-izedlogo-lg.off {
+    background-position: 0 0;
+}
+
+.zed-izedlogo-lg {
+    background-position: 0 -100px;
+    width: 50px;
+    height: 50px;
+}
+
+/*
+## <h2 class="font-L">Buttons</h2>
+
+    <a class="zed-btn" href="/welcome">Join Zed</a>
+    <a class="zed-btn zed-btn-type2" href="/welcome">Join Zed</a>
+    <a class="zed-btn zed-btn-type3" href="/welcome">Join Zed</a>
+
+*/
+.zed-btn {
+    border: 1px solid #000;
+    background-color: #4D4D4D;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 10px;
+    display:inline-block;
+    margin: 7px 10px 8px;
+}
+
+.zed-btn-type2 {
+    background-color: #632C8F;
+}
+
+.zed-btn:visited,
+.zed-btn:hover {
+    color: #fff;
+}
+
+.zed-btn-type3 {
+    background-color: #eaeaea;
+    border-color: #bfbfbf;
+    color: #545454;
+}
+
+.zed-btn-type3:visited,
+.zed-btn-type3:hover {
+    color: #545454;
+}
+
+
+/*
+## <h2 class="font-L">Tabs</h2>
+
+See <a href="http://yuilibrary.com/yui/docs/tabview/">YUI Library documentation</a> for
+more information on how to implement a tabview.
+See <a href="http://int.zed.yahoo.com/user">the user profile page</a> for an example.
+
+*/
+.yui3-tabview-loading {
+    display: none;
+}
+
+.yui3-tabview-list {
+    border-bottom: solid 5px #00b45d;
+}
+
+.yui3-tab {
+    background: #bfbfbf;
+    border-radius: 5px 5px 0 0;
+    text-align: center;
+}
+
+.yui3-tab-selected {
+    background: #00b45d;
+}
+
+.yui3-tab .yui3-tab-label {
+    color: #fff;
+    padding: 8px 20px 4px;
+}
+
+.yui3-tab-selected .yui3-tab-label {
+    font-weight: bold;
+}
+
+.yui3-tabview-panel {
+    padding: 20px;
+}
+
+/*
+## <h2 class="font-L">Switches</h2>
+
+    <div>
+        <input type="checkbox" class="visuallyhidden zed-switch-checkbox" id="switch1">
+        <label class="zed-switch-label" for="switch1">This is a switch <span class="zed-switch-ctrl"></span></label>
+    </div>
+
+    <div>
+        <input type="checkbox" class="visuallyhidden zed-switch-checkbox" id="switch2" disabled="disabled">
+        <label class="zed-switch-label" for="switch2">This is a unchecked and disabled switch <span class="zed-switch-ctrl"></span></label>
+    </div>
+
+    <div>
+        <input type="checkbox" class="visuallyhidden zed-switch-checkbox" id="switch3" disabled="disabled" checked="checked">
+        <label class="zed-switch-label" for="switch2">This is a checked and disabled switch <span class="zed-switch-ctrl"></span></label>
+    </div>
+*/
+.zed-switch-ctrl {
+    background: url('/static/assets/images/icons/switch.png') -22px 0 no-repeat;
+    border-radius: 4px;
+    display: inline-block;
+    width: 48px;
+    height: 21px;
+    -webkit-transition: background-position 200ms ease-in-out;
+    -moz-transition: background-position 200ms ease-in-out;
+    -ms-transition: background-position 200ms ease-in-out;
+    -o-transition: background-position 200ms ease-in-out;
+    transition: background-position 200ms ease-in-out;
+}
+
+.zed-switch-checkbox:checked + .zed-switch-label .zed-switch-ctrl {
+    background-position: 0 0;
+}
+
+.zed-checkbox:focus + .zed-checkbox-label,
+.zed-switch-checkbox:focus + .zed-switch-label .zed-switch-ctrl {
+    box-shadow: 0 0 5px #000;
+}
+
+.zed-checkbox:disabled + .zed-checkbox-label,
+.zed-switch-checkbox:disabled + .zed-switch-label .zed-switch-ctrl {
+    opacity: 0.5;
+}
+
+.zed-checkbox:disabled + .zed-checkbox-label,
+.zed-switch-checkbox:disabled + .zed-switch-label {
+    cursor: default;
+}
+
+/*
+## <h2 class="font-L">Dialog</h2>
+
+    <div class="zed-dialog">
+        <button class="ir zed-iclose">Close</button>
+        <form>
+            <p>Form content</p>
+        </form>
+    </div>
+*/
+.yui3-widget-mask {
+    background-color: #000;
+    opacity: 0.8;
+}
+
+.yui3-panel.yui3-widget-modal:focus {
+    outline: 0 none;
+}
+
+.zed-dialog {
+    background: #fff;
+    border-radius: 6px;
+    border: 4px solid #ccc;
+    color: #000;
+    padding: 1.5rem;
+}
+
+.zed-dialog .hd {
+    border-bottom: solid 1px #000;
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.zed-dialog .bd {
+    padding-top: 1.5rem;
+}
+
+.zed-dialog .bd p {
+    margin-bottom: 1em;
+}
+
+.zed-dialog .bd p:last-child {
+    margin-bottom: 0;
+}
+
+.zed-dialog-type2 {
+    background: #030303;
+    border: 0 none;
+    color: #fff;
+}
+
+.zed-dialog-type2 .hd {
+    border-bottom-color: #fff;
+}
+
+.zed-dialog .zed-iclose {
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+/*
+ Rate ( Thumbs up / Thumbs Down) Widgets
+*/
+/*
+#
+##  <ul class="zed-rate-list">
+        <li class="zed-rate-li">
+            <label for="thumbsUp" class="zed-rate-label thumbs-up-{{id}}">{{thumbsUpCount}}</label>
+        </li>
+        <li class="zed-rate-li">
+            <input type="radio" class="zed-rate-input thumbs-up zed-rate-thumbs-up" id="thumbsUp" name="rate"  value="thumbsUp"}} />
+            <div class="thumbs-up zed-rate-thumb deselected"></div>
+        </li>
+        <li class="zed-rate-li">
+            <input type="radio" id="thumbsDown" name="rate" class="zed-rate-input thumbs-down zed-rate-thumbs-down" value="thumbsDown" />
+            <div data-comment-id="{{id}}" class="thumbs-down zed-rate-thumb deselected"></div>
+        </li>
+        <li class="zed-rate-li">
+            <label for="thumbsDown" class="zed-rate-label thumbs-down-{{id}}">{{thumbsDownCount}}</label>
+        </li>
+    </ul>
+*/
+.zed-rate-list {
+    list-style-type: none;
+}
+
+.zed-rate-li {
+    float: left;
+    margin:0 0.4em 0 0;
+}
+.zed-rate-input {
+    height: 40px !important;
+    position: relative;
+    opacity: 0;
+    width: 40px !important;
+    z-index: 1;
+}
+
+.zed-rate-thumb {
+    height: 40px;
+    margin: -40px 0 0 0;
+    position: relative;
+    width: 40px;
+}
+
+.zed-rate-thumbs-up+.thumbs-up {
+    background-image: url('/static/assets/images/icons/thumbsup.png');
+    background-repeat: no-repeat;
+    background-color: none;
+    background-clip: content-box;
+    -webkit-background-clip: content-box;
+    background-size: contain;
+}
+
+.zed-rate-thumbs-up:checked+.thumbs-up {
+    background-image: url('/static/assets/images/icons/thumbsup_select.png');
+}
+
+.zed-rate-thumbs-up:disabled+.thumbs-up {
+    cursor: default;
+}
+
+.zed-rate-thumbs-down+.thumbs-down {
+    background-image: url('/static/assets/images/icons/thumbsdown.png');
+    background-repeat: no-repeat;
+    background-color: none;
+    background-clip: content-box;
+    -webkit-background-clip: content-box;
+    background-size: contain;
+}
+
+.zed-rate-thumbs-down:checked+.thumbs-down {
+    background-image: url('/static/assets/images/icons/thumbsdown_select.png');
+}
+
+.zed-rate-thumbs-down:disabled+.thumbs-down {
+    cursor: default;
+}
+
+.zed-rate-label {
+    font-weight: bold;
+}
+.zed-list-type1 {
+    background: #fff;
+    margin-top: -3px;
+    padding: 0 35px 35px 35px;
+    border-radius: 0 0 5px 5px;
+}
+
+.zed-list-type1 ul {
+    list-style-type: none;
+}
+
+.zed-list-type1 .description-container:last-child {
+    display: none;
+}
+
+.zed-list-type1.inline .description-container:first-child {
+    display: none;
+}
+
+.zed-list-type1.inline .description-container {
+    display: table-row;
+    height: 60px; /* width of container 50h + 10m */
+}
+
+.zed-list-type1 .description {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.zed-list-type1.inline .list {
+    float:none;
+}
+
+.zed-list-type1 .list {
+    float:left;
+    padding: 0;
+}
+
+.zed-list-type1 .friend {
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-color: #b3b3b3;
+    margin: 5px;
+}
+
+.zed-list-type1 strong {
+    color: #226BA2;
+    font-weight: bold;
+}
+
 
 
 /*
@@ -329,7 +1143,6 @@ Version Manifest Info:
 }
 /* TODO we should have common tile styles, currently everything is targeted to article */
 .zed-landing .LREC {
-    border-radius: 14px;
     width: 100%;
     background-color: #222;
     border: solid 6px #333;
@@ -601,10 +1414,8 @@ Version Manifest Info:
 
 .zed-article-tile .article-interest,
 .zed-article-tile .tile-content {
-    cursor: pointer;
 }
 .zed-article-tile .article-interest.popular {
-    cursor: default;
 }
 
 /*
