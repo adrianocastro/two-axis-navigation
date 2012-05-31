@@ -1,0 +1,633 @@
+/*
+# <h1 class="font-XL">Base</h1>
+
+Used to set specific default values instead of resetting everything to zero.
+
+Table of Contents:
+
+ * [Box Model](#section-2)
+ * [Reset](#section-3)
+ * [Font, line-height, and foreground/background colors](#section-4)
+ * [Selection Highlighting](#section-5)
+ * [Links](#section-6)
+ * [Lists](#section-7)
+ * [Default styling](#section-8)
+ * [Print Styles](#section-9)
+ */
+
+/*
+## <h2 class="font-L">Fix box model</h2>
+
+Changes the default box sizing behavior for all elements to not include padding and border
+in the width of the containing element. Therefore, if you specify 200px width and add
+padding or border, you do not have to substract the padding/border from the width. The
+width will always stay at 200px.
+
+@see http://paulirish.com/2012/box-sizing-border-box-ftw/
+
+*/
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/*
+## <h2 class="font-L">Reset</h2>
+*/
+
+body,div,dl,dt,li,h1,h2,h3,h4,h5,h6,p,blockquote,figure,figcaption {
+    margin:0;
+    padding:0
+}
+
+abbr,
+img {
+    border:0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+q {
+    quotes:none;
+}
+
+q:before,
+q:after {
+    content:"";
+    content:none;
+}
+
+/*
+## <h2 class="font-L">Font, line-height, and foreground/background colors</h2>
+
+ * 13px == 1.3rem
+ * 16px == 1.6rem
+ * 20px == 2rem
+ * 30px == 3rem
+ * etc...
+
+*/
+html {
+    font: 62.5%/1.3 arial,helvetica,clean,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+}
+body {
+    background-color: #333;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+/*
+## <h2 class="font-L">Selection highlight</h2>
+
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection declarations have to be separate
+ * Also: hot pink! (or customize the background color to match your design)
+
+*/
+
+::-moz-selection {
+    background: #fe57a1;
+    color: #fff;
+    text-shadow: none;
+}
+
+::selection {
+    background: #fe57a1;
+    color: #fff;
+    text-shadow: none;
+}
+
+/*
+## <h2 class="font-L">Links</h2>
+*/
+
+a {
+    color: #00e;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+a:hover {
+    color: #06e;
+}
+
+a:focus {
+    outline: thin dotted;
+}
+
+/* Improve readability when focused and hovered in all browsers: h5bp.com/h */
+a:hover,a:active {
+    outline: 0;
+}
+
+/*
+## <h2 class="font-L">Lists</h2>
+
+There are no default style lists currently. Each mojit will define its own list style.
+
+*/
+
+ul,
+ol {
+    margin:0 0;
+    padding:0 0 0 0;
+}
+
+nav ul,
+nav ol {
+    list-style:none;
+    list-style-image:none;
+    margin:0;
+    padding:0;
+}
+
+dd {
+    margin: 0 0 0 40px;
+    padding: 0;
+}
+
+/*
+## <h2 class="font-L">Default styling</h2>
+*/
+
+abbr {
+    font-variant:normal
+}
+abbr[title] {
+    border-bottom:1px dotted;
+}
+
+b,
+strong {
+    font-weight:bold;
+}
+
+blockquote {
+    margin:1em 40px;
+}
+
+hr {
+    border:0;
+    border-top:1px solid #ccc;
+    display:block;
+    height:1px;
+    margin:1em 0;
+    padding:0;
+}
+
+small {
+    font-size:85%;
+}
+
+
+/* Position subscript and superscript content without affecting line-height: h5bp.com/k */
+sub,
+sup {
+    font-size:75%;
+    line-height:0;
+    position:relative;
+    vertical-align:baseline;
+}
+
+sup {
+    top:-.5em;
+}
+
+sub {
+    bottom:-.25em;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+em,
+cite {
+    font-style: italic;
+    font-weight: normal;
+}
+
+/*
+   1. Improve image quality when scaled in IE7: h5bp.com/d
+   2. Remove the gap between images and borders on image containers (h5bp.com/i/440 is wrong on that one)
+*/
+img {
+    -ms-interpolation-mode:bicubic;
+    vertical-align:bottom;
+}
+
+
+/*
+## <h2 class="font-L">Print styles</h2>
+
+Included in base.css to avoid required HTTP connection: h5bp.com/r
+*/
+@media print {
+    * {
+        background:transparent!important;
+        color:black!important;
+        box-shadow:none!important;
+        text-shadow:none!important;
+        filter:none!important;
+        -ms-filter:none!important;
+    }
+
+    /* Black prints faster: h5bp.com/s */
+    a,a:visited {
+        text-decoration:underline;
+    }
+
+    a[href]:after {
+        content:" (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content:" (" attr(title) ")";
+    }
+
+    .ir a:after,
+    a[href^=javascript:]:after,
+                        a[href^=#]:after {
+                                      content:"";
+                                  }
+
+/* Don't show links for images, or javascript/internal links */
+pre,
+blockquote {
+    border:1px solid #999;
+    page-break-inside:avoid;
+}
+
+thead {
+    display:table-header-group;
+}
+
+/* h5bp.com/t */
+tr,
+img {
+    page-break-inside:avoid;
+}
+
+img {
+    max-width:100%!important;
+}
+
+@page {
+    margin:.5cm;
+}
+
+p,h2,h3 {
+    orphans:3;
+    widows:3;
+}
+
+h2,h3 {
+    page-break-after:avoid;
+}
+    }
+
+
+
+
+/*
+# Landing - Master
+
+Version Manifest Info:
+*/
+
+/* Using zog until we have completed assessing using 'yog' Yahoo One Grid */
+
+.zed-landing .zog-wrap {
+    margin:0 auto;
+    padding: 0;
+}
+.zed-landing .zog-full {
+    width:100%;
+}
+
+/* REVIEW: Child elements need to define their own margins */
+.zog-grid li {
+    display:inline;
+    float:left;
+    padding:0;
+}
+.zed-landing .ad-tile {
+    text-align:center
+}
+/* TODO we should have common tile styles, currently everything is targeted to article */
+.zed-landing .LREC {
+    border-radius: 14px;
+    width: 100%;
+    background-color: #222;
+    border: solid 6px #333;
+    height: 22.5em;
+    padding-top:0.5em;
+}
+
+/*
+# Landing - Desktop
+
+Version Manifest Info:
+
+   * @vm generic_name: index-device
+   * @vm dimensions: device=desktop
+*/
+@media only screen and (max-width: 1150px) {
+    .zog-grid .zog-6u {
+        width:33.3%;
+    }
+    .zog-grid .zog-8u {
+        width:44%;
+    }
+    .zog-grid .zog-10u {
+        width:56%;
+    }
+    .zog-grid .zog-12u {
+        width:66.6%;
+    }
+}
+
+@media only screen and (min-width: 1151px) {
+    .zog-grid .zog-6u {
+        width:25%;
+    }
+    .zog-grid .zog-8u {
+        width:33%;
+    }
+    .zog-grid .zog-10u {
+        width:42%;
+    }
+    .zog-grid .zog-12u {
+        width:50%;
+    }
+}
+
+
+/*
+# Interest Tile - Master
+
+Version Manifest Info:
+*/
+
+/**
+ * TODO: consider making these styles common so all tile types can benefit.
+ * This may make more sense as .zed-landing .tile
+ */
+.zed-article-tile {
+    background-color: #222;
+    position: relative;
+    border: solid 6px #333;
+    height: 22.5em;
+}
+
+.zed-article-tile,
+.zed-article-tile a {
+    color: #fff;
+    line-height: 1.25;
+}
+
+.zed-article-tile .article-img {
+    display:block;
+    width:100%;
+    height:13.8em;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position: 50% 25%;
+}
+
+.zed-article-tile.show-interest .article-img {
+    height:12.3em;
+}
+
+.zed-article-tile .article-title {
+    font-weight: bold;
+    margin:8px 0 0 0; /* use margin to avoid strange issues with line-clamp */
+}
+
+.zed-article-tile.summary .article-title {
+    height: 8.8em;
+}
+
+/* had to move the ellipsis to an inner span due to conflicts between the anchor and webkit-line-clamp */
+.zed-article-tile .article-title .ellipsis {
+    display: block;
+    display: -webkit-box;
+}
+
+.zed-article-tile.summary .article-title .ellipsis {
+    max-height: 7.5em;
+    -webkit-line-clamp: 6;
+}
+
+.zed-article-tile.summary.show-interest .article-title {
+    height: 7.8em;
+}
+
+.zed-article-tile.rounded {
+    border-radius: 14px;
+}
+
+.zed-article-tile.rounded .article-interest {
+    border-radius: 0 0 6px 6px;
+}
+
+.zed-article-tile .article-title,
+.zed-article-tile .article-summary {
+    padding: 0 12px;
+}
+
+.zed-article-tile .article-interest {
+    background: #00a057;
+    bottom: 0;
+    color: #fff;
+    font-weight:bold;
+    left: 0;
+    padding: 3px 8px 5px 12px;
+    position: absolute;
+    width: 100%;
+}
+
+.zed-article-tile .article-interest .arrow-next {
+    border-left-color: #fff;
+    float: right;
+    margin-top: 2px;
+}
+
+.zed-article-tile .article-summary {
+    word-break: break-word;
+}
+
+.zed-article-tile .article-footer {
+    bottom: 8px;
+    color: #999;
+    font-style: normal;
+    left: 12px;
+    position: absolute;
+}
+.zed-article-tile.show-interest .article-footer {
+    bottom: 28px;
+}
+
+.zed-article-tile .article-source {
+    font-style: normal;
+}
+/* this adds a circle as a separator after the publisher. It's a bit hacky. */
+.zed-article-tile .article-source:after {
+    content: "\2022";
+    padding: 0 3px;
+}
+
+/* --------------------------------- */
+/* START layout-specific overrides   */
+/* --------------------------------- */
+.zed-article-tile.image-2col .article-title,
+.zed-article-tile.image-2col .article-summary,
+.zed-article-tile.image-2col .article-img {
+    width: 50%;
+    float: left;
+}
+.zed-article-tile.image-2col .article-img {
+    height: 21.6em;
+}
+.zed-article-tile.image-2col.show-interest .article-img {
+    height: 20em;
+}
+.zed-article-tile.image-1col .article-title .ellipsis {
+    -webkit-line-clamp: 2;
+    max-height: 2.5em;
+}
+.zed-article-tile.no-image-1col .article-body {
+    padding-top: 1px; /* to work around odd issue with unused margins */
+}
+.zed-article-tile.image-2col .article-title .ellipsis,
+.zed-article-tile.image-2col .article-summary,
+.zed-article-tile.no-image-1col .article-title .ellipsis,
+.zed-article-tile.no-image-1col .article-summary {
+    -webkit-line-clamp: 5;
+    max-height: 6.25em;
+}
+.zed-article-tile.image-2col .article-footer {
+    left: 50%;
+    padding: 0 12px;
+}
+.zed-article-tile.no-image-2col .article-title {
+    width: 60%;
+    float: left;
+}
+.zed-article-tile.no-image-2col .article-title .ellipsis {
+    -webkit-line-clamp: 6;
+    max-height: 7.5em;
+}
+.zed-article-tile.no-image-2col .article-summary {
+    width: 33%;
+    float: right;
+    -webkit-line-clamp: 10;
+    max-height: 12.5em;
+}
+.zed-article-tile.rounded.image-1col .article-img {
+    border-radius: 6px 6px 0 0;
+}
+.zed-article-tile.rounded.image-2col .article-img {
+    border-radius: 6px 0 0 6px;
+}
+.zed-article-tile.rounded.image-2col.show-interest .article-img {
+    border-radius: 6px 0 0 0;
+}
+/* --------------------------------- */
+/* END layout-specific overrides     */
+/* --------------------------------- */
+
+
+/* --------------------------------- */
+/* START grid-specific overrides     */
+/* --------------------------------- */
+.zog-full .zed-article-tile {
+    height: 32em;
+}
+.zog-full .zed-article-tile .article-img {
+    height: 23.7em;
+}
+.zog-full .zed-article-tile.image-2col .article-img {
+    height: 31.6em;
+}
+.zog-full .zed-article-tile.image-2col.show-interest .article-img {
+    height: 30.5em;
+}
+.zog-12u .zed-article-tile.image-2col .article-img {
+    width: 60%;
+}
+.zog-12u .zed-article-tile.image-2col .article-title,
+.zog-12u .zed-article-tile.image-2col .article-summary,
+.zog-12u .zed-article-tile.image-2col .article-footer {
+    width: 40%;
+}
+.zog-12u .zed-article-tile.image-2col .article-footer {
+    left: 60%;
+}
+.zog-12u .zed-article-tile.no-image-1col .article-body {
+    width: 85%;
+}
+.zog-6u .zed-article-tile.image-1col .article-title .ellipsis {
+    -webkit-line-clamp: 3;
+    max-height: 3.75em;
+}
+
+/* --------------------------------- */
+/* END grid-specific overrides       */
+/* --------------------------------- */
+
+
+/*
+# Article - Desktop
+
+Version Manifest Info:
+
+   * @vm generic_name: interest_tile-device
+   * @vm dimensions: device=desktop
+*/
+
+.zed-article-tile .article-interest,
+.zed-article-tile .tile-content {
+    cursor: pointer;
+}
+.zed-article-tile .article-interest.popular {
+    cursor: default;
+}
+
+/*
+# Ads
+
+Version Manifest Info:
+
+   * @vm generic_name: index
+*/
+@media only screen and (max-width: 1150px) {
+    /* check the river card sizes (card-iframe)/2 */
+    .zom-ads.container-none iframe {
+        width:1024px;
+        margin-left:-148px;
+    }
+}
+
+@media only screen and (min-width: 1151px) {
+    /* check the river card sizes (card-iframe)/2 */
+    .zom-ads.container-none iframe {
+        width:1024px;
+        margin-left:-74px;
+    }
+}
+
+
