@@ -29,10 +29,8 @@ h2 {
 #scrollview-container ul {
     height: 100%;
     width: 100%;
-    /* does not work with horizontal scrollview (obviously)
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    */
 }
 
 #scrollview-container ul li {
@@ -41,8 +39,6 @@ h2 {
     height: 100%;
     display: inline-block;
     background-color: white;
-    /* does not work with vertical scrollview
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-     */
 }

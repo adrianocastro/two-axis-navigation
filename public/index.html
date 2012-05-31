@@ -12,7 +12,7 @@
         </ul>
     </div>
 
-    <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui-min.js"></script>
+    <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui.js"></script>
     <script id="list-template" type="text/x-handlebars-template">
         <article>
             <h1>Page {{number}}</h1>
@@ -25,7 +25,7 @@
         </article>
     </script>
     <script>
-        YUI().use('handlebars', 'scrollview', 'scrollview-paginator', function(Y) {
+        YUI().use('handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', function(Y) {
             var container = Y.one('#scrollview-container ul'),
                 source = Y.one('#list-template').get('text'),
                 template = Y.Handlebars.compile(source),
@@ -39,30 +39,75 @@
             container.setStyle('width', window.width);
             container.setStyle('height', window.height);
 
-            var scrollview = new Y.ScrollView({
-                id: 'scrollview',
-                srcNode: '#scrollview-container',
-                width: window.width,
-                flick: {
-                    minDistance:10,
-                    minVelocity:0.3,
-                    axis: "x"
+//            var scrollview = new Y.ScrollView({
+//                id: 'scrollview',
+//                srcNode: '#scrollview-container',
+//                width: window.width,
+//                flick: {
+//                    minDistance:10,
+//                    minVelocity:0.3,
+//                    axis: "x"
+//                }
+//            });
+//
+//            scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+//                selector: 'li'
+//            });
+//
+//            scrollview.render();
+//
+//            container.get('children').each(function (item) {
+//                var scrollview = new Y.ScrollView({
+//                    srcNode: item.one('article'),
+//                    height: window.height
+//                });
+//                scrollview.render();
+//            });
+
+            var anim = new Y.Anim({
+                node: container,
+                duration: .2,
+                easing: Y.Easing.easeOut
+            });
+
+            var timeout;
+            container.on('scroll', function (e) {
+                if (anim.get('running')) {
+                    return;
                 }
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    var containerLeft = container.get('scrollLeft'),
+                        liWidth = container.one('li').get('offsetWidth'),
+                        x =  Math.round(containerLeft / liWidth) * liWidth;
+                    anim.set('to', {
+                        scroll: [x, 0]
+                    });
+                    anim.run();
+                }, 200);
             });
 
-            scrollview.plug(Y.Plugin.ScrollViewPaginator, {
-                selector: 'li'
-            });
-
-            scrollview.render();
-
-            container.get('children').each(function (item) {
-                var scrollview = new Y.ScrollView({
-                    srcNode: item.one('article'),
-                    height: window.height
-                });
-                scrollview.render();
-            });
+            // Flicks don't work well with native scrolling on touch devices
+//            container.on('flick', function (e) {
+//                var containerLeft = container.get('scrollLeft'),
+//                    liWidth = container.one('li').get('offsetWidth'),
+//                    x;
+//
+//                if ('x' === e.flick.axis) {
+//                    if (0 > e.flick.distance) {
+//                        x = (Math.round(containerLeft / liWidth) + 1) * liWidth;
+//                    } else if (0 < e.flick.distance) {
+//                        x = (Math.round(containerLeft / liWidth) - 1) * liWidth;
+//                    }
+//
+//                    if (0 < x < container.get('offsetWidth')) {
+//                        anim.set('to', {
+//                            scroll: [x, 0]
+//                        });
+//                        anim.run();
+//                    }
+//                }
+//            });
         });
     </script>
 </body>
