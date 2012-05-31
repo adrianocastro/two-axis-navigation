@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 10px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin: .5rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+    margin: .5rem;
+}
+
+#scrollview {
+    border: 3px solid #333;
+}
+
+#scrollview-container {
+    white-space: nowrap;
+    background-color: #333;
+}
+
+#scrollview-container ul {
+    width: 100%;
+}
+
+#scrollview-container ul li {
+    white-space: normal;
+    width: 100%;
+    display: inline-block;
+    background-color: white;
+}
