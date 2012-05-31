@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Both Axes Native</title>
+    <title>Both Axes Scrollview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css" type="text/css" charset="utf-8">
@@ -14,6 +14,7 @@
     </div>
 
     <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui.js"></script>
+    <script src="../SingleAxisScrollview.js"></script>
     <script id="list-template" type="text/x-handlebars-template">
         <div class="zed-landing">
             <ul class="zog-wrap zog-grid clearfix">
@@ -258,7 +259,7 @@
         </article>
     </script>
     <script>
-        YUI().use('handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', function(Y) {
+        YUI().use('handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
             var container = Y.one('#scrollview-container ul'),
                 source = Y.one('#list-template').get('text'),
                 template = Y.Handlebars.compile(source),
@@ -272,75 +273,61 @@
             container.setStyle('width', window.width);
             container.setStyle('height', window.height);
 
-//            var scrollview = new Y.ScrollView({
-//                id: 'scrollview',
-//                srcNode: '#scrollview-container',
-//                width: window.width,
-//                flick: {
-//                    minDistance:10,
-//                    minVelocity:0.3,
-//                    axis: "x"
-//                }
-//            });
-//
-//            scrollview.plug(Y.Plugin.ScrollViewPaginator, {
-//                selector: 'li'
-//            });
-//
-//            scrollview.render();
-//
-//            container.get('children').each(function (item) {
-//                var scrollview = new Y.ScrollView({
-//                    srcNode: item.one('article'),
-//                    height: window.height
-//                });
-//                scrollview.render();
-//            });
-
-            var anim = new Y.Anim({
-                node: container,
-                duration: .2,
-                easing: Y.Easing.easeOut
-            });
-
-            var timeout;
-            container.on('scroll', function (e) {
-                if (anim.get('running')) {
-                    return;
+            var scrollview = new Y.ScrollView({
+                id: 'scrollview',
+                srcNode: '#scrollview-container',
+                width: window.width,
+                flick: {
+                    minDistance:10,
+                    minVelocity:0.3,
+                    axis: "x"
                 }
-                clearTimeout(timeout);
-                timeout = setTimeout(function () {
-                    var containerLeft = container.get('scrollLeft'),
-                        liWidth = container.one('li').get('offsetWidth'),
-                        x =  Math.round(containerLeft / liWidth) * liWidth;
-                    anim.set('to', {
-                        scroll: [x, 0]
-                    });
-                    anim.run();
-                }, 200);
             });
 
-            // Flicks don't work well with native scrolling on touch devices
-//            container.on('flick', function (e) {
-//                var containerLeft = container.get('scrollLeft'),
-//                    liWidth = container.one('li').get('offsetWidth'),
-//                    x;
-//
-//                if ('x' === e.flick.axis) {
-//                    if (0 > e.flick.distance) {
-//                        x = (Math.round(containerLeft / liWidth) + 1) * liWidth;
-//                    } else if (0 < e.flick.distance) {
-//                        x = (Math.round(containerLeft / liWidth) - 1) * liWidth;
-//                    }
-//
-//                    if (0 < x < container.get('offsetWidth')) {
-//                        anim.set('to', {
-//                            scroll: [x, 0]
-//                        });
-//                        anim.run();
-//                    }
-//                }
-//            });
+            scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+                selector: 'li.card'
+            });
+
+            scrollview.render();
+
+            container.get('children').each(function (item) {
+                // ### Instantiate the card scrollview using the SingleAxisScrollView
+                var cardScrollView  = new Y.Media.SingleAxisScrollView({
+                    srcNode: item,
+                    height: window.height,
+                    flick: {
+                        minDistance: 10,
+                        minVelocity: 0.3,
+                        axis: "y"
+                    },
+                    axis: 'y'
+                });
+
+                // FIXME: can this be moved to singleaxissv class
+                // Check movement along X and Y axis to figure out which scrollview to lock
+                overrideGM(cardScrollView, function (e) {
+                    // Check movement is of vertical orientation (movement along Y axis is greater than X axis)
+                    var verticalSwipe = (Math.abs(e.pageX - this.startX) < Math.abs(e.pageY - this.startY));
+
+                    // If horizontal movement is detected and the card scrollview isn't being dragged or flicked then lock it
+                    if (!verticalSwipe && !cardScrollView._isDragging && !cardScrollView._flicking) {
+                        cardScrollView.disable();
+                    }
+                });
+
+                // Render the card scrollview
+                cardScrollView.render();
+            });
+
+            function overrideGM (sv, customCode) {
+                var orig = sv._onGestureMove;
+
+                // Run the custom function as well as the original one
+                sv._onGestureMove = function (e) {
+                    customCode.apply(this, arguments);
+                    orig.apply(this, arguments);
+                };
+            }
         });
     </script>
 </body>
