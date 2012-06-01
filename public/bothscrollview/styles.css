@@ -13,6 +13,4 @@
     height: 100%;
     display: inline-block;
     background-color: white;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
 }

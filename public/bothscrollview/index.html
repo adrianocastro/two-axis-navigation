@@ -324,9 +324,10 @@
             container.setStyle('width', window.width);
             container.setStyle('height', window.height);
 
-            var scrollview = new Y.ScrollView({
+            var scrollview = new Y.Media.SingleAxisScrollView({
                 id: 'scrollview',
-                srcNode: '#scrollview-container',
+                boundingBox: '#scrollview-container',
+                contentBox: Y.one('#scrollview-container').one('ul'),
                 width: window.width,
                 flick: {
                     minDistance:10,
@@ -339,13 +340,25 @@
                 selector: 'li.card'
             });
 
+            // FIXME: can this be moved to singleaxissv class
+            // Check movement along X and Y axis to figure out which scrollview to lock
+            overrideGM(scrollview, function (e) {
+                // Check movement is of vertical orientation (movement along Y axis is greater than X axis)
+                var verticalSwipe = (Math.abs(e.pageX - this.startX) < Math.abs(e.pageY - this.startY));
+
+                // If vertical movement is detected and the river scrollview isn't being dragged or flicked then lock it
+                if (verticalSwipe && !scrollview._isDragging && !scrollview._flicking) {
+                    scrollview.disable();
+                }
+            });
+
+
             scrollview.render();
 
             container.get('children').each(function (item) {
                 // ### Instantiate the card scrollview using the SingleAxisScrollView
                 var cardScrollView  = new Y.Media.SingleAxisScrollView({
-                    srcNode: item,
-                    height: window.height,
+                    srcNode: item.one('.zed-landing'),
                     flick: {
                         minDistance: 10,
                         minVelocity: 0.3,
@@ -353,6 +366,7 @@
                     },
                     axis: 'y'
                 });
+
 
                 // FIXME: can this be moved to singleaxissv class
                 // Check movement along X and Y axis to figure out which scrollview to lock
