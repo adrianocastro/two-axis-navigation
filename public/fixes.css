@@ -1,0 +1,3 @@
+.zed-article-tile {
+    -webkit-backface-visibility: hidden; /* fixes overflow scroll rendering issues */
+}

@@ -1150,44 +1150,6 @@ Version Manifest Info:
     padding-top:0.5em;
 }
 
-/*
-# Landing - Desktop
-
-Version Manifest Info:
-
-   * @vm generic_name: index-device
-   * @vm dimensions: device=desktop
-*/
-@media only screen and (max-width: 1150px) {
-    .zog-grid .zog-6u {
-        width:33.3%;
-    }
-    .zog-grid .zog-8u {
-        width:44%;
-    }
-    .zog-grid .zog-10u {
-        width:56%;
-    }
-    .zog-grid .zog-12u {
-        width:66.6%;
-    }
-}
-
-@media only screen and (min-width: 1151px) {
-    .zog-grid .zog-6u {
-        width:25%;
-    }
-    .zog-grid .zog-8u {
-        width:33%;
-    }
-    .zog-grid .zog-10u {
-        width:42%;
-    }
-    .zog-grid .zog-12u {
-        width:50%;
-    }
-}
-
 
 /*
 # Interest Tile - Master
