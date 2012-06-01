@@ -1403,20 +1403,35 @@ Version Manifest Info:
 /* --------------------------------- */
 
 
+
 /*
-# Article - Desktop
+# Article Index - Smartphone
 
 Version Manifest Info:
 
-   * @vm generic_name: interest_tile-device
-   * @vm dimensions: device=desktop
+   * @vm generic_name: index-device
+   * @vm dimensions: device=smartphone
 */
+/*-- Image Style Overrides -------------------------------*/
+.zed-article .zed-article-img {
+    height: 17rem;
+}
 
-.zed-article-tile .article-interest,
-.zed-article-tile .tile-content {
+/*-- Header section styles ------------------------------*/
+.zed-article .zed-article-hd {
+    padding: 0 15px;
 }
-.zed-article-tile .article-interest.popular {
+.zed-article h3 {
+    padding: 10px 0 15px 0;
 }
+.zed-article .zed-article-bd {
+    padding: 15px;
+}
+.zed-article .article-metadata {
+    left: 15px;
+    margin-bottom: 15px;
+}
+
 
 /*
 # Ads
