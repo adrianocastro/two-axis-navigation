@@ -311,14 +311,14 @@
                 container.appendChild('<li class="zed-river-item"><div class="zed-river-wrap">'+html+'</div></li>');
             }
 
-            container.setStyle('width', window.width);
-            container.setStyle('height', window.height);
+            container.setStyle('width', window.innerWidth);
+            container.setStyle('height', window.innerHeight);
 
             var scrollview = new Y.Media.SingleAxisScrollView({
                 id: 'scrollview',
                 boundingBox: '.zed-river-content',
                 contentBox: Y.one('.zed-river-content').one('ul'),
-                width: window.width,
+                width: window.innerWidth,
                 flick: {
                     minDistance:10,
                     minVelocity:0.3,
@@ -350,13 +350,14 @@
                 var cardWrap = item.one('.zed-river-wrap'),
                     cardScrollView  = new Y.Media.SingleAxisScrollView({
                         srcNode: cardWrap,
-                        height: window.height,
-                        flick: false,
+                        height: window.innerHeight,
+                        flick: {
+                            minDistance:10,
+                            minVelocity:0.3,
+                            axis: "y"
+                        },
                         axis: 'y'
                     });
-
-                cardWrap.setStyle('overflow', 'hidden');
-                cardWrap.setStyle('height', window.height);
 
 
                 // FIXME: can this be moved to singleaxissv class

@@ -307,13 +307,13 @@
                 container.appendChild('<li class="zed-river-item"><div class="zed-river-wrap">'+html+'</div></li>');
             }
 
-            container.setStyle('width', window.width);
-            container.setStyle('height', window.height);
+            container.setStyle('width', window.innerWidth);
+            container.setStyle('height', window.innerHeight);
 
             var scrollview = new Y.ScrollView({
                 id: 'scrollview',
                 srcNode: '.zed-river-content',
-                width: window.width,
+                width: window.innerWidth,
                 flick: {
                     minDistance:10,
                     minVelocity:0.3,
