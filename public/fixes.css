@@ -1,3 +1,8 @@
-.zed-article-tile {
-    -webkit-backface-visibility: hidden; /* fixes overflow scroll rendering issues */
+.zed-article-tile .article-body {
+    height: 19em;
 }
+
+.zed-article-tile .article-footer {
+    margin-left: 12px;
+    margin-bottom: 3px;
+ }

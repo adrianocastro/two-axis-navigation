@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="../common.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="../fixes.css" type="text/css" charset="utf-8">
 </head>
 <body>
     <div id="scrollview-container">
@@ -307,7 +308,7 @@
 
             for(var i=0; i<3; ++i) {
                 html = template({number: i+1});
-                container.appendChild('<li class="card">'+html+'</li>');
+                container.appendChild('<li class="card"><div class="card-wrap">'+html+'</div></li>');
             }
 
             container.setStyle('width', window.width);
@@ -347,7 +348,8 @@
             container.get('children').each(function (item) {
                 // ### Instantiate the card scrollview using the SingleAxisScrollView
                 var cardScrollView  = new Y.Media.SingleAxisScrollView({
-                    srcNode: item.one('.zed-landing'),
+                    srcNode: item.one('.card-wrap'),
+                    height: window.height,
                     flick: {
                         minDistance: 10,
                         minVelocity: 0.3,

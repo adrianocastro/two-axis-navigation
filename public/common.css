@@ -1163,7 +1163,6 @@ Version Manifest Info:
  */
 .zed-article-tile {
     background-color: #222;
-    position: relative;
     border: solid 6px #333;
     height: 22.5em;
 }
@@ -1226,12 +1225,9 @@ Version Manifest Info:
 
 .zed-article-tile .article-interest {
     background: #00a057;
-    bottom: 0;
     color: #fff;
     font-weight:bold;
-    left: 0;
     padding: 3px 8px 5px 12px;
-    position: absolute;
     width: 100%;
 }
 
@@ -1246,14 +1242,10 @@ Version Manifest Info:
 }
 
 .zed-article-tile .article-footer {
-    bottom: 8px;
     color: #999;
     font-style: normal;
-    left: 12px;
-    position: absolute;
 }
 .zed-article-tile.show-interest .article-footer {
-    bottom: 28px;
 }
 
 .zed-article-tile .article-source {
