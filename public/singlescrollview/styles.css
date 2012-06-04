@@ -1,0 +1,14 @@
+.zed-river-content {
+    white-space: nowrap;
+}
+
+.zed-river-content > ul {
+    width: 100%;
+}
+
+.zed-river-content > ul > li {
+    background-color: #333;
+    white-space: normal;
+    width: 100%;
+    display: inline-block;
+}

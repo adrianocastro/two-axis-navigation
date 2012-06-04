@@ -105,4 +105,4 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
 
     Y.namespace("Media").SingleAxisScrollView = SingleAxisScrollView;
 
-}, '0.0.1', { requires: ['media.scrollview-base', 'media.scrollview-paginator'] });
+}, '0.0.1', { requires: ['scrollview'] });

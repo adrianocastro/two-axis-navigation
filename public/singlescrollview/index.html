@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Single Long Page</title>
+    <title>Single ScrollView</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css" type="text/css" charset="utf-8">
@@ -281,6 +281,25 @@
     </ul>
 </div>
 
-<div style="clear: both"></div>
+<script src="http://yui.yahooapis.com/3.5.1/build/yui/yui.js"></script>
+<script src="../SingleAxisScrollview.js"></script>
+<script>
+    YUI().use('media.single-axis-scrollview', function(Y) {
+        var cardWrap = Y.one('.zed-river-wrap'),
+            cardScrollView  = new Y.Media.SingleAxisScrollView({
+                srcNode: cardWrap,
+                height: window.innerHeight,
+                flick: {
+                    minDistance:10,
+                    minVelocity:0.3,
+                    axis: "y"
+                },
+                axis: 'y'
+            });
+
+        // Render the card scrollview
+        cardScrollView.render();
+    });
+</script>
 </body>
 </html>
