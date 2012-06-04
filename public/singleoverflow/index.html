@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="../fixes.css" type="text/css" charset="utf-8">
 </head>
 <body>
-    <div id="scrollview-container">
-        <ul>
-            <li class="card">
+<div class="zed-river-content">
+    <ul class="zed-river-list">
+            <li class="zed-river-content">
                 <div class="zed-landing">
                     <ul class="zog-wrap zog-grid clearfix " id="yui_3_4_1_2_1338504599461_488">
                         <li class="zog-12u">
@@ -277,16 +277,5 @@
             </li>
         </ul>
     </div>
-
-    <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui.js"></script>
-    <script>
-        YUI().use('event', 'node', function (Y) {
-            var tiles = Y.all('.zed-article-tile'),
-                timeout;
-            Y.all('#scrollview-container > ul > li').on('scroll', function (e) {
-                console.log('style set');
-            });
-        });
-    </script>
 </body>
 </html>

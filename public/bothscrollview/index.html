@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../fixes.css" type="text/css" charset="utf-8">
 </head>
 <body>
-    <div id="scrollview-container">
-        <ul>
+    <div class="zed-river-content">
+        <ul class="zed-river-list">
         </ul>
     </div>
 
@@ -301,14 +301,14 @@
     </script>
     <script>
         YUI().use('handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
-            var container = Y.one('#scrollview-container ul'),
+            var container = Y.one('.zed-river-content ul'),
                 source = Y.one('#list-template').get('text'),
                 template = Y.Handlebars.compile(source),
                 html;
 
             for(var i=0; i<3; ++i) {
                 html = template({number: i+1});
-                container.appendChild('<li class="card"><div class="card-wrap">'+html+'</div></li>');
+                container.appendChild('<li class="zed-river-item"><div class="zed-river-wrap">'+html+'</div></li>');
             }
 
             container.setStyle('width', window.width);
@@ -316,8 +316,8 @@
 
             var scrollview = new Y.Media.SingleAxisScrollView({
                 id: 'scrollview',
-                boundingBox: '#scrollview-container',
-                contentBox: Y.one('#scrollview-container').one('ul'),
+                boundingBox: '.zed-river-content',
+                contentBox: Y.one('.zed-river-content').one('ul'),
                 width: window.width,
                 flick: {
                     minDistance:10,
@@ -327,7 +327,7 @@
             });
 
             scrollview.plug(Y.Plugin.ScrollViewPaginator, {
-                selector: 'li.card'
+                selector: 'li.zed-river-item'
             });
 
             // FIXME: can this be moved to singleaxissv class
@@ -342,21 +342,21 @@
                 }
             });
 
-
             scrollview.render();
 
+            var cardScrollViews = [];
             container.get('children').each(function (item) {
                 // ### Instantiate the card scrollview using the SingleAxisScrollView
-                var cardScrollView  = new Y.Media.SingleAxisScrollView({
-                    srcNode: item.one('.card-wrap'),
-                    height: window.height,
-                    flick: {
-                        minDistance: 10,
-                        minVelocity: 0.3,
-                        axis: "y"
-                    },
-                    axis: 'y'
-                });
+                var cardWrap = item.one('.zed-river-wrap'),
+                    cardScrollView  = new Y.Media.SingleAxisScrollView({
+                        srcNode: cardWrap,
+                        height: window.height,
+                        flick: false,
+                        axis: 'y'
+                    });
+
+                cardWrap.setStyle('overflow', 'hidden');
+                cardWrap.setStyle('height', window.height);
 
 
                 // FIXME: can this be moved to singleaxissv class
@@ -373,6 +373,7 @@
 
                 // Render the card scrollview
                 cardScrollView.render();
+                cardScrollViews.push(cardScrollView);
             });
 
             function overrideGM (sv, customCode) {
@@ -384,6 +385,9 @@
                     orig.apply(this, arguments);
                 };
             }
+
+            scrollview.hasNestedScrollers = true;
+            scrollview.nestedScrollers    = cardScrollViews;
         });
     </script>
 </body>

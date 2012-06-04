@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="../fixes.css" type="text/css" charset="utf-8">
 </head>
 <body>
-    <div id="scrollview-container">
-        <ul>
+    <div class="zed-river-content">
+        <ul class="zed-river-list">
         </ul>
     </div>
 
@@ -300,14 +300,14 @@
     </script>
     <script>
         YUI().use('handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', function(Y) {
-            var container = Y.one('#scrollview-container ul'),
+            var container = Y.one('.zed-river-content ul'),
                 source = Y.one('#list-template').get('text'),
                 template = Y.Handlebars.compile(source),
                 html;
 
             for(var i=0; i<20; ++i) {
                 html = template({number: i+1});
-                container.appendChild('<li class="card">'+html+'</li>');
+                container.appendChild('<li class="zed-river-item"><div class="zed-river-wrap">'+html+'</div></li>');
             }
 
             container.setStyle('width', window.width);
