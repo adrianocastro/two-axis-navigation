@@ -330,18 +330,6 @@
                 selector: 'li.zed-river-item'
             });
 
-            // FIXME: can this be moved to singleaxissv class
-            // Check movement along X and Y axis to figure out which scrollview to lock
-            overrideGM(scrollview, function (e) {
-                // Check movement is of vertical orientation (movement along Y axis is greater than X axis)
-                var verticalSwipe = (Math.abs(e.pageX - this.startX) < Math.abs(e.pageY - this.startY));
-
-                // If vertical movement is detected and the river scrollview isn't being dragged or flicked then lock it
-                if (verticalSwipe && !scrollview._isDragging && !scrollview._flicking) {
-                    scrollview.disable();
-                }
-            });
-
             scrollview.render();
 
             var cardScrollViews = [];
@@ -359,36 +347,10 @@
                         axis: 'y'
                     });
 
-
-                // FIXME: can this be moved to singleaxissv class
-                // Check movement along X and Y axis to figure out which scrollview to lock
-                overrideGM(cardScrollView, function (e) {
-                    // Check movement is of vertical orientation (movement along Y axis is greater than X axis)
-                    var verticalSwipe = (Math.abs(e.pageX - this.startX) < Math.abs(e.pageY - this.startY));
-
-                    // If horizontal movement is detected and the card scrollview isn't being dragged or flicked then lock it
-                    if (!verticalSwipe && !cardScrollView._isDragging && !cardScrollView._flicking) {
-                        cardScrollView.disable();
-                    }
-                });
-
                 // Render the card scrollview
                 cardScrollView.render();
-                cardScrollViews.push(cardScrollView);
+                scrollview.addNestedScroller(cardScrollView);
             });
-
-            function overrideGM (sv, customCode) {
-                var orig = sv._onGestureMove;
-
-                // Run the custom function as well as the original one
-                sv._onGestureMove = function (e) {
-                    customCode.apply(this, arguments);
-                    orig.apply(this, arguments);
-                };
-            }
-
-            scrollview.hasNestedScrollers = true;
-            scrollview.nestedScrollers    = cardScrollViews;
         });
     </script>
 </body>

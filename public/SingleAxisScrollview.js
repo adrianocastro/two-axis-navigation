@@ -8,9 +8,11 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
             // of scrollviews that need to be progamatically handled and thus
             // only have certain movements (like flick and drag) disabled.
             initializer: function () {
+                this.nestedScrollers = [];
                 // save original (custom or default) flick state
                 this.originalFlickState = this.get('flick');
                 this.originalDragState  = this.get('drag');
+                this.overrideGM();
             },
             enableUI: function () {
                 this.set('flick', this.originalFlickState);
@@ -21,6 +23,38 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
                 this.set('flick', false);
                 this.set('drag', false);
                 this.uiDisabled = false;
+            },
+            addNestedScroller: function (scroller) {
+                this.nestedScrollers.push(scroller);
+            },
+            overrideGM: function () {
+                var self = this,
+                    orig = this._onGestureMove;
+
+                // Run the custom function as well as the original one
+                if ('y' === this.get('axis')) {
+                    this._onGestureMove = function (e) {
+                        // Check movement is of vertical orientation (movement along Y axis is greater than X axis)
+                        var verticalSwipe = (Math.abs(e.pageX - this.startX) < Math.abs(e.pageY - this.startY));
+
+                        // If horizontal movement is detected and the card scrollview isn't being dragged or flicked then lock it
+                        if (!verticalSwipe && !self._isDragging && !self._flicking) {
+                            self.disable();
+                        }
+                        orig.apply(this, arguments);
+                    }
+                } else if ('x' === this.get('axis')) {
+                    this._onGestureMove = function (e) {
+                        // Check movement is of vertical orientation (movement along Y axis is greater than X axis)
+                        var verticalSwipe = (Math.abs(e.pageX - this.startX) < Math.abs(e.pageY - this.startY));
+
+                        // If vertical movement is detected and the river scrollview isn't being dragged or flicked then lock it
+                        if (verticalSwipe && !self._isDragging && !self._flicking) {
+                            self.disable();
+                        }
+                        orig.apply(this, arguments);
+                    }
+                }
             },
 
             _onGestureMoveStart: function (e) {
@@ -38,7 +72,7 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
                     svInstance;
 
                 // Re-enable self and (if applicable) nested scrollviews on movement end
-                if (nestedScrollers && this.hasNestedScrollers) {
+                if (this.nestedScrollers.length) {
                     Y.Object.each(nestedScrollers, function (svInstance) {
                         svInstance.enableUI();
                     });
