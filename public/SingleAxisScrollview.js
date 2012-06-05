@@ -40,6 +40,7 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
 
                         // If horizontal movement is detected and the card scrollview isn't being dragged or flicked then lock it
                         if (!verticalSwipe && !self._isDragging && !self._flicking) {
+//                            console.log('DISABLE VERTICAL SWIPE');
                             self.disable();
                         }
                         orig.apply(this, arguments);
@@ -51,6 +52,7 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
 
                         // If vertical movement is detected and the river scrollview isn't being dragged or flicked then lock it
                         if (verticalSwipe && !self._isDragging && !self._flicking) {
+//                            console.log('DISABLE HORIZONTAL SWIPE');
                             self.disable();
                         }
                         orig.apply(this, arguments);
@@ -67,21 +69,28 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
             },
 
             _onGestureMoveEnd: function (e) {
+//                console.log('_onGestureMoveEnd() ' + this.get('axis'));
                 SingleAxisScrollView.superclass._onGestureMoveEnd.apply(this, arguments);
                 if (!e.flick) {
-                    this._reEnableScrollViews();
+                    this._reEnableScrollViews(this.get('axis'));
+                }
+                if ('x' === this.get('axis')) {
+//                    console.log('ENABLED X AXIS');
+                    this.enable();
                 }
             },
 
             _onScrollEnd: function (e) {
+//                console.log('_onScrollEnd() ' + this.get('axis'));
                 // Only re-enable if this is the end of translation
                 if (e.onGestureMoveEnd) {
                     return;
                 }
-                this._reEnableScrollViews();
+                this._reEnableScrollViews(this.get('axis'));
             },
 
-            _reEnableScrollViews: function () {
+            _reEnableScrollViews: function (callee) {
+//                console.log('RE-ENABLE SCROLLVIEW by ' + callee);
                 // Re-enable self and (if applicable) nested scrollviews on movement end
                 Y.Object.each(this.nestedScrollers, function (svInstance) {
                     svInstance.enable();
