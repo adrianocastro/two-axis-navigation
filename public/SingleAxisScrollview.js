@@ -13,6 +13,7 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
                 this.originalFlickState = this.get('flick');
                 this.originalDragState  = this.get('drag');
                 this.overrideGM();
+                this.on('scrollEnd', Y.bind(this._onScrollEnd, this));
             },
             enableUI: function () {
                 this.set('flick', this.originalFlickState);
@@ -67,16 +68,24 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
 
             _onGestureMoveEnd: function (e) {
                 SingleAxisScrollView.superclass._onGestureMoveEnd.apply(this, arguments);
-
-                var nestedScrollers = this.nestedScrollers,
-                    svInstance;
-
-                // Re-enable self and (if applicable) nested scrollviews on movement end
-                if (this.nestedScrollers.length) {
-                    Y.Object.each(nestedScrollers, function (svInstance) {
-                        svInstance.enableUI();
-                    });
+                if (!e.flick) {
+                    this._reEnableScrollViews();
                 }
+            },
+
+            _onScrollEnd: function (e) {
+                // Only re-enable if this is the end of translation
+                if (e.onGestureMoveEnd) {
+                    return;
+                }
+                this._reEnableScrollViews();
+            },
+
+            _reEnableScrollViews: function () {
+                // Re-enable self and (if applicable) nested scrollviews on movement end
+                Y.Object.each(this.nestedScrollers, function (svInstance) {
+                    svInstance.enable();
+                });
                 this.enable();
             },
 
@@ -139,4 +148,4 @@ YUI.add("media.single-axis-scrollview", function (Y, NAME) {
 
     Y.namespace("Media").SingleAxisScrollView = SingleAxisScrollView;
 
-}, '0.0.1', { requires: ['scrollview'] });
+}, '0.0.1', { requires: ['scrollview', 'event'] });
