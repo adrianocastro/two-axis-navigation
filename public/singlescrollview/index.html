@@ -284,17 +284,16 @@
 <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui.js"></script>
 <script src="../SingleAxisScrollview.js"></script>
 <script>
-    YUI().use('media.single-axis-scrollview', function(Y) {
+    YUI().use('scrollview', function(Y) {
         var cardWrap = Y.one('.zed-river-wrap'),
-            cardScrollView  = new Y.Media.SingleAxisScrollView({
+            cardScrollView  = new Y.ScrollView({
                 srcNode: cardWrap,
                 height: window.innerHeight,
                 flick: {
                     minDistance:10,
                     minVelocity:0.3,
                     axis: "y"
-                },
-                axis: 'y'
+                }
             });
 
         // Render the card scrollview
