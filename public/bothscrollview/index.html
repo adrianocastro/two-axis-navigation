@@ -308,7 +308,7 @@
                     }
                     return {};
                 })(),
-                viewName = queryParams['lite'] ? 'list-template' : 'list-template-lite',
+                viewName = queryParams['lite'] ? 'list-template-lite' : 'list-template',
                 source = Y.one('#'+viewName).get('text'),
                 template = Y.Handlebars.compile(source),
                 html,
