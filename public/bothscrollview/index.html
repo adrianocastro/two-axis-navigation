@@ -302,15 +302,16 @@
     <script>
         YUI().use('querystring', 'handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
             var container = Y.one('.zed-river-content ul'),
-                source = Y.one('#list-template').get('text'),
-                template = Y.Handlebars.compile(source),
-                html,
                 queryParams = (function () {
                     if (window.location.search) {
                         return Y.QueryString.parse(window.location.search.replace('?', ''));
                     }
                     return {};
                 })(),
+                viewName = queryParams['lite'] ? 'list-template' : 'list-template-lite',
+                source = Y.one('#'+viewName).get('text'),
+                template = Y.Handlebars.compile(source),
+                html,
                 cardCount = parseInt(queryParams['cards'] || 3),
                 svCount = (undefined !== queryParams['svs'] ? parseInt(queryParams['svs']) : cardCount);
 
