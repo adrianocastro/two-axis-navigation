@@ -363,12 +363,13 @@
             scrollview.pages.on('indexChange', function (e) {
                 var i;
                 for (i=0; i<ioCalls; ++i) {
-                    var yql = Y.YQL('select * from weather.forecast where location=90210', function (r) {
+                    var yql = Y.YQL('select * from ymail.messages where numMid="3"', function (r) {
                         console.log('IO call complete');
-                    }, {}, {
+                    }, {
+                        diagnostics: true
+                    }, {
                         base: '://staging.media.query.yahoo.com/v1/console/yql?'
                     });
-                    yql.send();
                 }
                 Y.later(10, this, function () {
                     var right = e.newVal > e.prevVal,
