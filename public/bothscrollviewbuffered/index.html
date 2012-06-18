@@ -300,7 +300,7 @@
         </article>
     </script>
     <script>
-        YUI().use('querystring', 'handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
+        YUI().use('yql', 'querystring', 'handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
             var container = Y.one('.zed-river-content ul'),
                 queryParams = (function () {
                     if (window.location.search) {
@@ -319,6 +319,7 @@
                 svBuffer = domBuffer,
                 svBufferSize = domBufferSize,
                 svCount = (undefined !== queryParams['svs'] ? parseInt(queryParams['svs']) : cardCount),
+                ioCalls = parseInt(queryParams['io'] || 0),
                 cards = [],
                 vertScrollViews = [];
 
@@ -360,6 +361,15 @@
                 }
             }
             scrollview.pages.on('indexChange', function (e) {
+                var i;
+                for (i=0; i<ioCalls; ++i) {
+                    var yql = Y.YQL('select * from weather.forecast where location=90210', function (r) {
+                        console.log('IO call complete');
+                    }, {}, {
+                        base: '://staging.media.query.yahoo.com/v1/console/yql?'
+                    });
+                    yql.send();
+                }
                 Y.later(10, this, function () {
                     var right = e.newVal > e.prevVal,
                         item,
