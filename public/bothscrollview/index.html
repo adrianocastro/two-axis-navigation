@@ -300,7 +300,7 @@
         </article>
     </script>
     <script>
-        YUI().use('querystring', 'handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
+        YUI().use('yql', 'querystring', 'handlebars', 'scrollview', 'scrollview-paginator', 'anim', 'anim-scroll', 'media.single-axis-scrollview', function(Y) {
             var container = Y.one('.zed-river-content ul'),
                 queryParams = (function () {
                     if (window.location.search) {
@@ -313,7 +313,8 @@
                 template = Y.Handlebars.compile(source),
                 html,
                 cardCount = parseInt(queryParams['cards'] || 3),
-                svCount = (undefined !== queryParams['svs'] ? parseInt(queryParams['svs']) : cardCount);
+                svCount = (undefined !== queryParams['svs'] ? parseInt(queryParams['svs']) : cardCount),
+            ioCalls = parseInt(queryParams['io'] || 0);
 
             for(var i=0; i<cardCount; ++i) {
                 html = template({number: i+1});
@@ -362,6 +363,19 @@
                     // Render the card scrollview
                     cardScrollView.render();
                     scrollview.addNestedScroller(cardScrollView);
+                }
+            });
+
+            scrollview.pages.on('indexChange', function (e) {
+                var i;
+                for (i=0; i<ioCalls; ++i) {
+                    var yql = Y.YQL('select * from ymail.messages where numMid="3"', function (r) {
+                        console.log('IO call complete');
+                    }, {
+                        diagnostics: true
+                    }, {
+                        base: '://staging.media.query.yahoo.com/v1/console/yql?'
+                    });
                 }
             });
         });
