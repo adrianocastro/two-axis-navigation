@@ -3,7 +3,7 @@
     <title>Both Axes Scrollview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.1/build/cssreset/cssreset-min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.6.0pr2/build/cssreset/cssreset-min.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="../common.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="../fixes.css" type="text/css" charset="utf-8">
@@ -14,7 +14,7 @@
         </ul>
     </div>
 
-    <script src="http://yui.yahooapis.com/3.5.1/build/yui/yui.js"></script>
+    <script src="http://yui.yahooapis.com/3.6.0pr2/build/yui/yui.js"></script>
     <script src="../SingleAxisScrollview.js"></script>
     <script id="list-template" type="text/x-handlebars-template">
         <div class="zed-landing">
@@ -349,15 +349,18 @@
             });
 
             scrollview.plug(Y.Plugin.ScrollViewPaginator, {
-                selector: 'li.zed-river-item'
+                selector: 'li.zed-river-item',
+                optimizeMemory: true
             });
 
-            for (i=0; i<=svBufferSize; ++i) {
-                var cardScrollview = initializeVerticalScrollView(container.get('children').item(i).one('.zed-river-wrap'));
-                vertScrollViews[i] = cardScrollview;
-                scrollview.nestedScrollers.push(cardScrollview);
-                if (0 !== i) {
-                    vertScrollViews[i].disable();
+            if (svCount) {
+                for (i=0; i<=svBufferSize && i<=svCount; ++i) {
+                    var cardScrollview = initializeVerticalScrollView(container.get('children').item(i).one('.zed-river-wrap'));
+                    vertScrollViews[i] = cardScrollview;
+                    scrollview.nestedScrollers.push(cardScrollview);
+                    if (0 !== i) {
+                        vertScrollViews[i].disable();
+                    }
                 }
             }
             scrollview.pages.on('indexChange', function (e) {
@@ -386,7 +389,7 @@
                             container.get('children').item(e.prevVal-domBufferSize).one('.zed-river-wrap').get('children').item(0).remove();
                         }
                         // Deal with ScrollViews
-                        if (!vertScrollViews[e.newVal + svBufferSize]) {
+                        if (e.newVal + svBufferSize < svCount && !vertScrollViews[e.newVal + svBufferSize]) {
                             console.log('Adding ScrollView to ' + (e.newVal + svBufferSize));
                             cardScrollView = initializeVerticalScrollView(container.get('children').item(e.prevVal+svBufferSize).one('.zed-river-wrap'));
                             vertScrollViews[e.newVal + svBufferSize] = cardScrollView;
@@ -406,7 +409,7 @@
                             container.get('children').item(e.prevVal+domBufferSize).one('.zed-river-wrap').get('children').item(0).remove();
                         }
                         // Deal with ScrollViews
-                        if (!vertScrollViews[e.newVal - svBufferSize]) {
+                        if (e.newVal - svBufferSize < svCount && !vertScrollViews[e.newVal - svBufferSize]) {
                             console.log('Adding ScrollView to ' + (e.newVal - svBufferSize));
                             cardScrollView = initializeVerticalScrollView(container.get('children').item(e.prevVal-svBufferSize).one('.zed-river-wrap'));
                             vertScrollViews[e.newVal - svBufferSize] = cardScrollView;
@@ -418,7 +421,9 @@
                         }
                     }
                     scrollview.nestedScrollers = vertScrollViews.slice(e.newVal - svBufferSize, e.newVal+svBufferSize);
-                    vertScrollViews[e.newVal].enable();
+                    if (vertScrollViews[e.newVal]) {
+                        vertScrollViews[e.newVal].enable();
+                    }
                     console.log(scrollview.nestedScrollers);
                     console.log('DOM size ' + container.all('.zed-landing').size());
                     console.log('----');
