@@ -314,7 +314,8 @@
                 html,
                 cardCount = parseInt(queryParams['cards'] || 3),
                 svCount = (undefined !== queryParams['svs'] ? parseInt(queryParams['svs']) : cardCount),
-            ioCalls = parseInt(queryParams['io'] || 0);
+                ioCalls = parseInt(queryParams['io'] || 0),
+                optimizeMemory = queryParams['opt'] ? true : false;
 
             for(var i=0; i<cardCount; ++i) {
                 html = template({number: i+1});
@@ -339,7 +340,7 @@
 
             scrollview.plug(Y.Plugin.ScrollViewPaginator, {
                 selector: 'li.zed-river-item',
-                optimizeMemory: true
+                optimizeMemory: optimizeMemory
             });
 
             scrollview.render();
