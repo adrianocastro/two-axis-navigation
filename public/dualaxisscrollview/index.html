@@ -1,0 +1,357 @@
+<html>
+<head>
+    <title>Dual Axis Scrollview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.6.0pr2/build/cssreset/cssreset-min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="styles.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="../common.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="../fixes.css" type="text/css" charset="utf-8">
+</head>
+<body>
+    <div class="zed-river-content">
+        <ul class="zed-river-list">
+        </ul>
+    </div>
+
+    <script src="http://yui.yahooapis.com/3.6.0pr2/build/yui/yui.js"></script>
+    <script src="paginator-plugin.js"></script>
+    <script src="scrollview-base.js"></script>
+    <script id="list-template" type="text/x-handlebars-template">
+        <div class="zed-landing">
+            <ul class="zog-wrap zog-grid clearfix " id="yui_3_4_1_2_1338504599461_488">
+                <li class="zog-12u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="868933a9-9c1e-370f-b7a5-7357f14765ed" data-interestid="yct:001000298" data-alias-key="story=instant-view-rim-enlists-jpmorgan-rbc-review-warns-204338832--sector" id="yui_3_4_1_48_1338504101354_132" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">PAGE {{number}}: RIM enlists JPMorgan, RBC in review, warns of loss</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-29T22:48:43Z">2 days ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="6e762f48-dd06-3569-b316-bb36d611f0dc" data-interestid="yct:001000298" data-alias-key="story=elusive-emergency-fund-why-134526103" id="yui_3_4_1_48_1338504101354_133" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">That Elusive Emergency Fund: Why You Need It</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="U.S.News &amp; World Report LP">U.S.News &amp; World Report LP</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T13:45:26Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="f45fe1a8-9355-3229-9c49-1e51e984debc" data-interestid="yct:001000028" data-alias-key="story=russian-group-complete-reading-takeover-062333234--sow" id="yui_3_4_1_48_1338504101354_134" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Russian group complete Reading takeover</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T06:23:33Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Soccer<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="20bd4a4c-b3c7-3119-a23d-8cf41d006267" data-interestid="yct:001000168" data-alias-key="" id="yui_3_4_1_48_1338504101354_135" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">IRS Exams: What they Mean for Taxpayers</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Fox Business (RSS)">Fox Business (RSS)</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T13:41:32Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Employment &amp; Career<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="96e995fe-1739-3e52-be2d-24c22a3a5bed" data-interestid="yct:001000298" data-alias-key="story=manage-own-money-144359889" id="yui_3_4_1_48_1338504101354_136" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">How to Manage Your Own Money</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="U.S.News &amp; World Report LP">U.S.News &amp; World Report LP</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T14:43:59Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-12u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="f13185f2-4718-3afe-9a00-3f77f7277163" data-interestid="yct:001000168" data-alias-key="story=building-side-business-help-retirees-185617149" id="yui_3_4_1_48_1338504101354_137" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">How Building a Side Business Can Help Retirees</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="U.S.News &amp; World Report LP">U.S.News &amp; World Report LP</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T18:56:17Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Employment &amp; Career<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="e4a7ccbd-2e0e-3089-a095-e5783f3c1fc0" data-interestid="yct:001000298" data-alias-key="story=rim-hires-bankers-strategic-review-forecasts-first-quarter-021030242--sector" id="yui_3_4_1_48_1338504101354_138" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/BWRGO4bekkUbp2n8VLNifw--/YXBwaWQ9eW5ld3M7aD0xNTk7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/Reuters/2012-05-29T234814Z_3_CBRE84S1L1P00_RTROPTP_2_CTECH-US-RIM-WARNING.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">RIM hires bankers for strategic review, forecasts first quarter loss</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T02:10:30Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="29360da8-9951-3b81-98cb-6725eae008b6" data-interestid="yct:001000298" data-alias-key="story=rim-warns-operating-loss-layoffs-come-215702728--finance" id="yui_3_4_1_48_1338504101354_139" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/SBOosDhMZdsXz1VAPu0Dzw--/YXBwaWQ9eW5ld3M7aD0xNjU7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/ap_webfeeds/841e3f3a30d2130f110f6a706700fb51.jpg)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">RIM warns of operating loss, layoffs to come</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Associated Press">Associated Press</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T03:29:01Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="31d8907c-2623-327a-8d5d-a4fd5f1ac856" data-interestid="yct:001000298" data-alias-key="story=blackberry-maker-rim-hires-bankers-warns-loss-203154770--sector" id="yui_3_4_1_48_1338504101354_140" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/BWRGO4bekkUbp2n8VLNifw--/YXBwaWQ9eW5ld3M7aD0xNTk7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/Reuters/2012-05-29T234814Z_3_CBRE84S1L1P00_RTROPTP_2_CTECH-US-RIM-WARNING.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">BlackBerry maker RIM sees operating loss, shares slump</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-29T23:48:14Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="752c4854-1f98-3d92-907a-8aa63dafc60e" data-interestid="yct:001000298" data-alias-key="story=analysis-even-hiring-bankers-rim-running-options-190039414--sector" id="yui_3_4_1_48_1338504101354_141" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/vkzRZVPVd5nhMD.ZY8icSw--/YXBwaWQ9eW5ld3M7aD0xNTk7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/Reuters/2012-05-30T193856Z_4_CBRE84T1GT700_RTROPTP_2_CBUSINESS-US-RIM-WARNING.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Analysis: Even after hiring bankers, RIM running out of options</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T20:35:40Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="ee707ee0-73ec-39a9-b81f-b4cf061024a9" data-interestid="Apple_Inc." data-alias-key="story=apple-ceo-wants-more-products-u-030756967" id="yui_3_4_1_48_1338504101354_142" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/vCbL9oypp7goxiJe5cxOjw--/YXBwaWQ9eW5ld3M7aD0xNjc7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/Reuters/2012-05-30T030756Z_1_CBRE84T08PU00_RTROPTP_2_CNEWS-US-APPLE-COOK.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Apple CEO sees TV as area of "intense interest"</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T06:20:18Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">>Apple Inc.<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="e9be87d4-5ce7-315c-8f2a-c86fffa60ad1" data-interestid="yct:001000298" data-alias-key="story=battered-blackberry-maker-weighs-options-041627642--finance" id="yui_3_4_1_48_1338504101354_143" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/SBOosDhMZdsXz1VAPu0Dzw--/YXBwaWQ9eW5ld3M7aD0xNjU7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/ap_webfeeds/841e3f3a30d2130f110f6a706700fb51.jpg)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Battered BlackBerry maker weighs options</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Associated Press">Associated Press</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T04:17:02Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-12u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="929d8350-4d45-3cdb-a448-7bad4b191fb1" data-interestid="yct:001000028" data-alias-key="story=gambia-demote-coach-appoint-italian-assistant-094246855--sow" id="yui_3_4_1_48_1338504101354_144" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Gambia demote coach, appoint Italian assistant</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T09:42:46Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Soccer<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="bdeba4b7-40c4-35cd-b1b6-12fca41c11f9" data-interestid="yct:001000298" data-alias-key="story=stock-index-futures-signal-early-losses-094351461--finance" id="yui_3_4_1_48_1338504101354_145" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/AuQpHiippJwVOdlNeYPflg--/YXBwaWQ9eW5ld3M7aD0xNzU7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/Reuters/2012-05-30T201416Z_1_CBRE84T1K7U00_RTROPTP_2_MARKETS-STOCKS.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Europe's deepening crisis drags Wall Street lower</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T20:38:40Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="8776bf73-b30c-3a5a-9806-915cd8eaa071" data-interestid="yct:001000298" data-alias-key="story=less-chevron-shareholders-back-frack-risk-report-175031736--finance" id="yui_3_4_1_48_1338504101354_146" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/9kWbRxtDa_y7JJczWDUFQw--/YXBwaWQ9eW5ld3M7aD0xNjk7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/Reuters/2012-05-30T220334Z_1_CBRE84T1PA000_RTROPTP_2_CHEVRON.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Less Chevron shareholders back frack risk report</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T17:50:31Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Finance<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile no-image-1col  show-interest" data-uuid="694f13dc-ddf3-364a-a3a8-45f1d0276990" data-interestid="yct:001000002" data-alias-key="story=pro-bowl-lives-2013-edition-played-hawaii-203207218--nfl" id="yui_3_4_1_48_1338504101354_147" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Pro Bowl lives on, 2013 edition to be played in Hawaii</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T20:32:07Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">American Football<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="dbd2c3b1-9a37-353a-970d-c88e05b763d8" data-interestid="yct:001000028" data-alias-key="story=dutch-minimum-warm-win-210825331--sow" id="yui_3_4_1_48_1338504101354_148" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/uxXLg1fH656VAZPIojfU9A--/YXBwaWQ9eW5ld3M7aD0xNjc7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_us/News/afp.com/photo_1338412084281-1-0.jpg)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Dutch do minimum in warm-up win</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="AFP">AFP</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T21:34:20Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Soccer<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-12u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="757aa702-315a-35d9-b7cf-778e1c018dfd" data-interestid="yct:001000028" data-alias-key="story=shenhua-set-name-batista-coach-reports-041659776" id="yui_3_4_1_48_1338504101354_149" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/VizqHGQWjjtMyj_bv24P6w--/YXBwaWQ9eW5ld3M7aD0zMzM7dz01MDA7cT05NQ--/http://media.zenfs.com/en_us/News/afp.com/photo_1338351160487-1-0.jpg)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Batista joins Shanghai, Drogba 'may follow'</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="AFP">AFP</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T15:39:19Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Soccer<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+                <li class="zog-6u">
+                    <article class="zed-tile zed-article-tile image-1col  show-interest" data-uuid="3490b7cd-d287-3baf-91ee-f3dba32d437e" data-interestid="yct:001000028" data-alias-key="story=batista-named-shanghai-manager-wants-drogba-162559532--sow" id="yui_3_4_1_48_1338504101354_150" data-entity-type="media.entities.article">
+                        <div class="article-body tile-content" role="button">
+                            <span class="article-img" style="background-image:url(http://l.yimg.com/bt/api/res/1.2/NJGXaOYDJvw8Ny.p42S.7A--/YXBwaWQ9eW5ld3M7aD0xOTc7dz0yNTA7cT05NQ--/http://media.zenfs.com/en_ZA/News/Reuters/2012-05-30T162711Z_1_AJOE84T19PE00_RTROPTP_2_OZASP-SOCCER-CHINA-SHANGHAI-BATISTA-20120530.JPG)">&nbsp;</span>
+                            <h2 class="article-title font-L">
+                                <span class="ellipsis">Batista named Shanghai manager, wants Drogba</span>
+                            </h2>
+                        </div>
+                        <footer class="article-footer font-S ellipsis">
+                            <cite class="article-source" title="Reuters">Reuters</cite><time class="article-pubdate" pubdate="pubdate" datetime="2012-05-30T16:25:59Z">1 day ago</time>
+                        </footer>
+                        <aside class="article-interest font-S tile-title ">Soccer<span class="arrow-next"></span></aside>
+                    </article>
+                </li>
+            </ul>
+        </div>
+    </script>
+    <script id="list-template-lite" type="text/x-handlebars-template">
+        <article style="font-size: 1.6em;">
+            <h1>Page {{number}}</h1>
+
+            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+            <h2>Header Level 2</h2>
+
+            <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+
+            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+
+            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+
+            <p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+        </article>
+    </script>
+    <script>
+        YUI({
+            modules : {
+                'paginator-plugin': {
+                    fullpath: 'paginator-plugin.js'
+                },
+                'scrollview-base': {
+                    fullpath: 'scrollview-base.js',
+                    requires: ['base', 'plugin', 'widget', 'event-gestures', 'event-mousewheel', 'transition', 'classnamemanager']
+                }
+            }
+        }).use('yql', 'querystring', 'handlebars', 'scrollview-base', 'paginator-plugin', 'anim', 'anim-scroll', function(Y) {
+            var container = Y.one('.zed-river-content ul'),
+                queryParams = (function () {
+                    if (window.location.search) {
+                        return Y.QueryString.parse(window.location.search.replace('?', ''));
+                    }
+                    return {};
+                })(),
+                viewName = queryParams['lite'] ? 'list-template-lite' : 'list-template',
+                source = Y.one('#'+viewName).get('text'),
+                template = Y.Handlebars.compile(source),
+                html,
+                cardCount = parseInt(queryParams['cards'] || 20);
+
+            for(var i=0; i<cardCount; ++i) {
+                html = template({number: i+1});
+                container.appendChild('<li class="zed-river-item"><div class="zed-river-wrap">'+html+'</div></li>');
+            }
+
+            container.setStyle('width', window.innerWidth);
+            container.setStyle('height', window.innerHeight);
+
+            var scrollview = new Y.ScrollView({
+                id: 'scrollview',
+                boundingBox: '.zed-river-content',
+                contentBox: Y.one('.zed-river-content').one('ul'),
+                width: window.innerWidth,
+                flick: {
+                    minDistance:10,
+                    minVelocity:0.3,
+                    axis: "x"
+                },
+                axis: "x"
+            });
+
+            scrollview.plug(Y.Plugin.ScrollViewPaginator, {
+                selector: 'li.zed-river-item'
+            });
+
+            scrollview.render();
+        });
+    </script>
+</body>
+</html>
