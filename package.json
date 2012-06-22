@@ -1,13 +1,21 @@
 {
     "name": "scrollview_playground",
     "version": "0.0.1",
-    "description": "My testing prototype for Zed scroll view implementations",
+    "description": "Prototype tests for Zed's scrollview implementations",
     "preferGlobal": false,
     "contributors": [
         {
             "name": "Michael Ridgway",
             "email": "mridgway@yahoo-inc.com"
-        }
+        },
+        {
+            "name": "Adriano Castro",
+            "email": "castroad@yahoo-inc.com"
+        },
+        {
+            "name": "Derek Gathright",
+            "email": "drg@yahoo-inc.com"
+        },
     ],
     "dependencies": {
         "connect": "1.8.2"

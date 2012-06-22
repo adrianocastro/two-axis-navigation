@@ -337,13 +337,7 @@
                 id: 'scrollview',
                 boundingBox: '.zed-river-content',
                 contentBox: Y.one('.zed-river-content').one('ul'),
-                width: window.innerWidth,
-                flick: {
-                    minDistance:10,
-                    minVelocity:0.3,
-                    axis: "x"
-                },
-                axis: "x"
+                width: window.innerWidth
             });
 
             scrollview.plug(Y.Plugin.ScrollViewPaginator, {

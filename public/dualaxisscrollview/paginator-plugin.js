@@ -118,8 +118,11 @@ Y.extend(PaginatorPlugin, Y.Plugin.Base, {
     initializer: function (config) {
         var paginator = this,
             host = paginator.get(HOST),
+            cb = host.get(CONTENT_BOX),
             optimizeMemory = config.optimizeMemory || paginator.optimizeMemory,
             padding = config.padding || paginator.padding;
+
+        this._cb = cb;
 
         paginator.padding = padding;
         paginator.optimizeMemory = optimizeMemory;
@@ -129,63 +132,92 @@ Y.extend(PaginatorPlugin, Y.Plugin.Base, {
 
         paginator.beforeHostMethod('_mousewheel', paginator._mousewheel);
         paginator.beforeHostMethod('_flickFrame', paginator._flickFrame);
-        paginator.beforeHostMethod('_onGestureMoveStart', function(){
-            console.log('_onGestureMoveStart');
-
-            // TODO:
-            //    - check which card you're in here instead of in scrollTo
+        paginator.beforeHostMethod('_onGestureMoveStart', function(e){
 
             var paginator = this,
-                host = paginator._host,
-                pageNodes = paginator._getPageNodes(),
+                index     = paginator.get(INDEX),
+                cardNode  = paginator._getPageNodes().item(index);
+
+            this.cardNode = cardNode;
+
+            // Store the mouse starting point (e.clientY) for this gesture
+            paginator.foo[index]._prevY = e.clientY;
+        });
+
+        paginator.beforeHostMethod('_onGestureMove', function(e){
+            var host = this._host,
+                scrollsVertical,
+                paginator = this,
                 index = paginator.get(INDEX);
 
-            paginator.foo[index].scrollY = -(parseInt(pageNodes.item(index).getStyle('top').replace('px', ''))) || 0;
+            if (host._scrollsVertical == null) {
+                host._scrollsVertical = (Math.abs(e.clientX - host._startClientX) < Math.abs(e.clientY - host._startClientY));
+            }
 
+            scrollsVertical = host._scrollsVertical;
+
+            if (host._prevent.move) {
+                e.preventDefault();
+            }
+
+            host._isDragging = true;
+            host._endClientY = e.clientY;
+            host._endClientX = e.clientX;
+
+            if (scrollsVertical) {
+                // Figure out the movement delta and add it to the previous scrolled amount
+                paginator.foo[index].scrollY -= e.clientY - paginator.foo[index]._prevY;
+                // TODO: remove host.set and create a hostScrollTo method
+                // paginator.hostScrollTo(SCROLL_Y, paginator.foo[index].scrollY);
+                // Set the scrollY coordinate calculated above
+                host.set(SCROLL_Y, paginator.foo[index].scrollY);
+                // Store previous y coordinate
+                paginator.foo[index]._prevY = e.clientY;
+            }
+            else {
+                host.set(SCROLL_X, -(e.clientX - host._startX));
+            }
+
+            return paginator._prevent;
         });
+
         paginator.beforeHostMethod('_onGestureMoveEnd', paginator._onGestureMoveEnd);
         paginator.beforeHostMethod('scrollTo', function(x, y, duration){
-            var paginator = this,
-                host = paginator._host,
-                isVert = host._scrollsVertical,
-                transition = {
-                    easing : 'ease-out',
+            console.log('scrollTo('+x+','+y+')');
+            var paginator     = this,
+                host          = paginator._host,
+                isVert        = host._scrollsVertical,
+                transition    = {
+                    easing   : 'ease-out',
                     duration : duration/1000
                 };
 
             if (isVert) {
+                var index = paginator.get(INDEX);
 
-                return false;
-                var index = paginator.get(INDEX),
-                    pageNodes = paginator._getPageNodes(),
-                    cardNode = pageNodes.item(index);
-
-                var scrollToY = paginator.foo[index].scrollY + y;
                 if (duration) {
-                    transition.top = -(scrollToY) + 'px';
-                    cardNode.transition(transition);
+                    transition.transform = 'translateY(' + -y + 'px) translateZ(0px)';
+                    this.cardNode.transition(transition);
                 }
                 else {
-                    cardNode.setStyle('position', 'relative').setStyle('top', -(scrollToY) + 'px');
+                    this.cardNode.setStyle('transform', 'translateY(' + -y + 'px) translateZ(0px)');
                 }
+
+                // Store last known y offset
+                this.foo[index].scrollY = y;
 
             }
             else {
-                var cb = host.get(CONTENT_BOX);
-
+                var cb = this._cb;
 
                 // TODO:
                 //     - consider using host's _transform
                 //     - consider replacing setStyle with a 0 duration transition on the else
                 if (duration) {
-                    console.log('overriden scrollTo with duration');
-                    console.log('transition obj', transition);
-                    transition.transform = 'translate('+ -x +'px,' + y +'px) translateZ(0px)';
+                    transition.transform = 'translateX('+ -x +'px) translateZ(0px)';
                     cb.transition(transition);
                 }
                 else {
-                    console.log('overriden scrollTo without duration');
-                    console.log('translateX('+ -x +'px) translateZ(0px)');
                     cb.setStyle('transform', 'translateX('+ -x +'px) translateZ(0px)');
                 }
             }
@@ -243,22 +275,26 @@ Y.extend(PaginatorPlugin, Y.Plugin.Base, {
      * @protected
      */
     _onGestureMoveEnd: function (e) {
-        var paginator = this,
-            host = paginator._host,
-            pageNodes = paginator._getPageNodes(),
+        var paginator  = this,
+            host       = paginator._host,
             isVertical = host._scrollsVertical,
-            index = paginator.get(INDEX);
+            index      = paginator.get(INDEX);
 
         if (!isVertical) {
             paginator.scrollTo(index);
         }
         else {
-            var offsetY = -(parseInt(pageNodes.item(index).getStyle('top').replace('px', '')));
+            // offsetY is negative when the user pulls the card down past its top margin
+            var offsetY = paginator.foo[index].scrollY;
+
+            // If pulled down past top
             if (offsetY < 0) {
                 offsetY = 0;
-                host.scrollTo(null, offsetY, 400);
+                // Reset offsetY to 0 and scrollTo top with animation
+                host.scrollTo(null, offsetY, 400, this.cardNode);
             }
-            console.log(offsetY);
+
+            console.log('updating scrollY for', index);
             paginator.foo[index].scrollY = offsetY;
         }
     },
@@ -271,6 +307,7 @@ Y.extend(PaginatorPlugin, Y.Plugin.Base, {
      * @protected
      */
     _flickFrame: function () {
+        console.log('_flickFrame() - paginator');
         var paginator = this,
             host = paginator._host,
             velocity = host._currentVelocity,
@@ -286,7 +323,6 @@ Y.extend(PaginatorPlugin, Y.Plugin.Base, {
             }
             return paginator._prevent;
         }
-
     },
 
     /**
@@ -300,7 +336,7 @@ Y.extend(PaginatorPlugin, Y.Plugin.Base, {
         var paginator = this,
             host = paginator._host,
             isForward = e.wheelDelta < 0, // down (negative) is forward.  @TODO Should revisit.
-            cb = host.get(CONTENT_BOX);
+            cb = this._cb;
 
         // Only if the mousewheel event occurred on a DOM node inside the CB
         if (cb.contains(e.target)){
